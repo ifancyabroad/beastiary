@@ -1,0 +1,89 @@
+@import '~src/variables'; 
+
+.monster-details {
+	position: relative;
+	margin-bottom: 42px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+
+	h1 {
+		margin: 0 24px 16px 0;
+	}
+}
+
+.underline {
+	position: absolute;
+	bottom: 0;
+	height: 2px;
+	width: 10%;
+	background-color: $primary-color;
+}
+
+.monster-sub-details {
+	display: flex;
+	flex-wrap: wrap;
+
+	p {
+		margin-right: 16px;
+		width: max-content;
+	}
+
+	span {
+		padding: 4px 8px;
+		display: inline-block;
+		box-sizing: border-box;
+	}
+
+	span:first-child {
+		border-radius: 14px 0 0 14px;
+		color: #fff;
+		background-color: $secondary-color;
+		border: 1px solid $secondary-color;
+	}
+
+	span:last-child {
+		border-radius: 0 14px 14px 0;
+		border: 1px solid $secondary-color;
+		border-left: none;
+		background-color: #fff;
+	}
+}
+
+table {
+	border-collapse: collapse;
+	border: 1px solid grey;
+	min-width: 200px;
+	margin-bottom: 24px;
+
+	td {
+		padding: 6px 8px;
+		border: 1px solid grey;
+	}
+
+	td:last-child {
+		text-align: center;
+		font-weight: 700;
+		background-color: #fff;
+	}
+
+	tr:nth-child(even) {
+		background-color: #ddd;
+	}
+
+	.monster-rating {
+		font-size: 1.2em;
+		font-weight: 700;
+
+		td:first-child {
+			color: #fff;
+			background-color: $primary-color;
+		}
+
+		td:last-child {
+			color: $primary-color;
+			background-color: #fff;
+		}
+	}
+}

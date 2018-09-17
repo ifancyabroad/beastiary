@@ -1,0 +1,33 @@
+@import '~src/variables'; 
+
+nav {
+	padding: 20px 26px;
+
+    .navbar-brand {
+    	font-family: 'Patua One', cursive;
+    }
+
+    .search-form {
+
+    	input {
+    		padding: 8px 12px;
+    		border: none;
+    		outline: none;
+    	}
+
+    	input[type="text"] {
+    		border-radius: 14px 0 0 14px;
+    	}
+
+    	input[type="submit"] {
+    		border-radius: 0 14px 14px 0;
+            vertical-align: initial;
+    		color: white;
+    		background-color: $primary-color;
+    	}
+
+    	input[type="submit"]:hover {
+    		cursor: pointer;
+    	}
+    }
+}

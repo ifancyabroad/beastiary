@@ -1,0 +1,10 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-5">
+  <a #siteBrand class="navbar-brand" href="/">Beastiary</a>
+  <div class="m-auto">
+		<form #searchForm="ngForm" class="search-form" (ngSubmit)="searchMonsters()">
+	  	<input type="text" name="search" [(ngModel)]="searchInput" required>
+	  	<input class="btn" type="submit" name="submit" value="Search">
+	  </form>  	
+  </div>
+  <div style="width: 100px"></div>
+</nav>

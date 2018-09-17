@@ -1,0 +1,11 @@
+.monster-list {
+	display: flex;
+	flex-wrap: wrap;
+
+	li {
+		min-width: 200px;
+		padding: 8px 12px;
+		margin: 6px;
+		background-color: rgba(255, 255, 255, 0.8);
+	}
+}

@@ -1,3 +1,7 @@
-<p>
-  monster-list works!
-</p>
+<div class="row">
+	<div class="col-lg-12">
+		<ul class="monster-list" [@listStagger]="currentMonsterList">
+			<li *ngFor="let monster of currentMonsterList"><a routerLink="/details/{{ monster.id }}">{{ monster.name }}</a></li>
+		</ul>
+	</div>
+</div>

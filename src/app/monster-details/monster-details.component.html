@@ -1,3 +1,85 @@
-<p>
-  monster-details works!
-</p>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="monster-details">
+			<h1>{{ monster.name }}</h1>
+			<div class="underline"></div>
+			<div class="monster-sub-details">
+				<p><span>Type</span><span>{{ capitalizeFirstLetter(monster.type) }}</span></p>
+				<p><span>Size</span><span>{{ monster.size }}</span></p>
+				<p><span>Alignment</span><span>{{ capitalizeFirstLetter(monster.alignment) }}</span></p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-3 col-sm-6">
+		<table>
+			<tbody>
+				<tr>
+					<td>Hit Points</td>
+					<td>{{ monster.hit_points }}</td>
+				</tr>
+				<tr>
+					<td>Strength</td>
+					<td>{{ monster.strength }}</td>
+				</tr>
+				<tr>
+					<td>Dexterity</td>
+					<td>{{ monster.dexterity }}</td>
+				</tr>
+				<tr>
+					<td>Constitution</td>
+					<td>{{ monster.constitution }}</td>
+				</tr>
+				<tr>
+					<td>Intelligence</td>
+					<td>{{ monster.intelligence }}</td>
+				</tr>
+				<tr>
+					<td>Wisdom</td>
+					<td>{{ monster.wisdom }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-lg-3 col-sm-6">
+		<table>
+			<tbody>
+				<tr>
+					<td>Armor Class</td>
+					<td>{{ monster.armor_class }}</td>
+				</tr>
+				<tr>
+					<td>Perception</td>
+					<td>{{ monster.perception }}</td>
+				</tr>
+				<tr>
+					<td>Constitution Save</td>
+					<td>{{ monster.constitution_save }}</td>
+				</tr>
+				<tr>
+					<td>Intelligence Save</td>
+					<td>{{ monster.intelligence_save }}</td>
+				</tr>
+				<tr>
+					<td>Wisdom Save</td>
+					<td>{{ monster.wisdom_save }}</td>
+				</tr>
+				<tr class="monster-rating">
+					<td>Challenge Rating</td>
+					<td>{{ monster.challenge_rating }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-lg-6">
+		<table>
+			<tbody>
+				<tr *ngFor="let ability of monster.special_abilities">
+					<td>{{ ability.name }}</td>
+					<td class="text-left">{{ ability.desc }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

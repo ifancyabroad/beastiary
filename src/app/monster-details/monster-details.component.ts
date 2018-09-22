@@ -2,12 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { trigger,style,transition,animate,keyframes,state } from '@angular/animations';
 
 @Component({
   selector: 'app-monster-details',
   templateUrl: './monster-details.component.html',
-  styleUrls: ['./monster-details.component.scss']
+  styleUrls: ['./monster-details.component.scss'],
+  animations: [
+    trigger('fade', [
+      state('in', style({opacity: 1, transform: 'translateX(0)'})),
+      transition('* <=> *', [     
+        style({opacity: 0, transform: 'translateX(25px)'}),
+        animate('800ms ease-out')
+      ])
+    ])
+  ]
 })
+
 export class MonsterDetailsComponent implements OnInit {
 
 	monster: Object;

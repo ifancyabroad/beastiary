@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router'
 import { trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
 
 @Component({
@@ -15,41 +14,20 @@ import { trigger,style,transition,animate,keyframes,query,stagger } from '@angul
         [
           style({opacity: 0, transform: 'translateY(-15px)'}),
           stagger('50ms', animate('550ms ease-out', style({opacity: 1, transform: 'translateY(0px)'})))
-        ], {optional: true}),
-        query(':leave', animate('50ms', style({opacity: 0})), {
-          optional: true
-        })
+        ], {optional: true})
       ])
     ])
   ]
 })
 export class MonsterListComponent implements OnInit {
 
-	currentMonsterList: Object[] = [];
+	currentMonsterList() {
+		return this.data.monsterList;
+	}
 
-  constructor(public data: DataService, private route: ActivatedRoute) { }
+  constructor(public data: DataService) { }
 
   ngOnInit() {
-  	this.updateMonsterList();
-  }
-
-  updateMonsterList() {
-  	this.data.getMonsterList().subscribe(data => {
-  		let regex = new RegExp(this.route.snapshot.paramMap.get('search'));
-	    let monsterList: Object[] = [];
-  		for (let monster of data['results']) {
-        if (regex.test(monster['name'].toLowerCase())) {
-          monster.id = this.extractId(monster.url);
-          monsterList.push(monster);
-        }
-      }
-      this.currentMonsterList = monsterList;
-  	})
-  }
-
-  extractId(url) {
-    let regex = /\d/g;
-    return url.match(regex).slice(1).join("");
   }
 
 }

@@ -1,10 +1,21 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-5">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-5" *ngIf="!firstSearch">
   <a #siteBrand class="navbar-brand" href="/">Beastiary</a>
   <div class="m-auto">
 		<form #searchForm="ngForm" class="search-form" (ngSubmit)="searchMonsters()">
 	  	<input type="text" name="search" [(ngModel)]="searchInput" required>
 	  	<input class="btn" type="submit" name="submit" value="Search">
-	  </form>  	
+	  </form>
   </div>
   <div style="width: 100px"></div>
 </nav>
+
+<div class="first-search" *ngIf="firstSearch">
+	<h1>BEASTIARY</h1>
+	<form #searchForm="ngForm" class="first-search-form" (ngSubmit)="searchMonsters()">
+	  	<input type="text" name="search" [(ngModel)]="searchInput" required>
+	  	<div class="first-search-btns">
+	  		<input class="btn" type="submit" name="submit" value="Search">
+		  	<input class="btn" type="submit" name="random" value="Random">
+	  	</div>
+	  </form>
+</div>

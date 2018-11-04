@@ -1,9 +1,17 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-5" *ngIf="!firstSearch">
-  <a #siteBrand class="navbar-brand" href="/">Beastiary</a>
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark mb-5" [@toggleNav]="firstSearch ? 'hide' : 'show'">
+  <a #siteBrand class="navbar-brand" routerLink="/" (click)="setFirstSearch()">Beastiary</a>
   <div class="m-auto">
 		<form #searchForm="ngForm" class="search-form" (ngSubmit)="searchMonsters()">
-	  	<input type="text" name="search" [(ngModel)]="searchInput" required>
-	  	<input class="btn" type="submit" name="submit" value="Search">
+	  	<input type="text" name="search" autocomplete="off" [(ngModel)]="searchInput" (keyup)="filterMonsters()" required>
+	  	<ul class="monster-list" *ngIf="searchInput && showList && !firstSearch">
+        <li *ngFor="let monster of currentMonsterList" (click)="setInput(monster.name)">{{ monster.name }}</li>
+      </ul>
+      <button class="btn" type="submit" name="submit" value="Search" [disabled]="!searchForm.form.valid">
+        <fa-icon [icon]="faSearch"></fa-icon>
+      </button>
+      <button class="btn" type="button" name="random" value="Random" (click)="searchRandomMonster()">
+        <fa-icon [icon]="faDiceD20"></fa-icon>
+      </button>
 	  </form>
   </div>
   <div style="width: 100px"></div>
@@ -11,11 +19,18 @@
 
 <div class="first-search" *ngIf="firstSearch">
 	<h1>BEASTIARY</h1>
+  <div class="underline"></div>
 	<form #searchForm="ngForm" class="first-search-form" (ngSubmit)="searchMonsters()">
-	  	<input type="text" name="search" [(ngModel)]="searchInput" required>
-	  	<div class="first-search-btns">
-	  		<input class="btn" type="submit" name="submit" value="Search">
-		  	<input class="btn" type="submit" name="random" value="Random">
-	  	</div>
-	  </form>
+  	<input type="text" name="search" autocomplete="off" [(ngModel)]="searchInput" (keyup)="filterMonsters()" required #search="ngModel">
+    <ul class="monster-list" *ngIf="searchInput && showList">
+      <li *ngFor="let monster of currentMonsterList" (click)="setInput(monster.name)">{{ monster.name }}</li>
+    </ul>
+    <button class="btn" type="submit" name="submit" value="Search" [disabled]="!searchForm.form.valid">
+      <fa-icon [icon]="faSearch"></fa-icon>
+    </button>
+    <button class="btn" type="button" name="random" value="Random" (click)="searchRandomMonster()">
+      <fa-icon [icon]="faDiceD20"></fa-icon>
+    </button>
+  	<!-- <span [hidden]="search.valid || search.pristine">*Must be at least 3 characters</span> -->
+  </form>
 </div>

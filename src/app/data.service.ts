@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
+  loading: boolean = false;
   currentMonsterList: Object[] = [];
 
   set monsterList(list) {
@@ -25,8 +26,9 @@ export class DataService {
 
   updateMonsterList(searchInput) {
     this.monsterList = [];
+    this.loading = true;
     this.getMonsterList().subscribe(data => {
-      let regex = new RegExp(searchInput);
+      let regex = new RegExp(searchInput.toLowerCase());
       let monsterList: Object[] = [];
       for (let monster of data['results']) {
         if (regex.test(monster['name'].toLowerCase())) {
@@ -35,6 +37,7 @@ export class DataService {
         }
       }
       this.monsterList = monsterList;
+      this.loading = false;
     })
   }
 

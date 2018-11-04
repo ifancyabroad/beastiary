@@ -3,6 +3,9 @@
 		<ul class="monster-list" [@listStagger]="currentMonsterList()">
 			<li *ngFor="let monster of currentMonsterList()"><a routerLink="/details/{{ monster.id }}">{{ monster.name }}</a></li>
 		</ul>
-		<p *ngIf="!currentMonsterList().length">Sorry no results!</p>
+		<div class="text-center">
+			<i class="fa fa-spinner fa-spin" [hidden]="!loadState()"></i>
+			<h2 *ngIf="!currentMonsterList().length" [hidden]="loadState()">Sorry no results!</h2>
+		</div>
 	</div>
 </div>

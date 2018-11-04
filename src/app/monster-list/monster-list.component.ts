@@ -21,6 +21,10 @@ import { trigger,style,transition,animate,keyframes,query,stagger } from '@angul
 })
 export class MonsterListComponent implements OnInit {
 
+  loadState() {
+    return this.data.loading;
+  }
+
 	currentMonsterList() {
 		return this.data.monsterList;
 	}

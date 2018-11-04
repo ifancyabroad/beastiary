@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MonsterListComponent } from './monster-list/monster-list.component';
 import { MonsterDetailsComponent } from './monster-details/monster-details.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
@@ -21,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FontAwesomeModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule

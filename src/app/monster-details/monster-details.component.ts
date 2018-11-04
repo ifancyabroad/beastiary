@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { trigger,style,transition,animate,keyframes,state } from '@angular/animations';
 
 @Component({
@@ -23,14 +23,21 @@ export class MonsterDetailsComponent implements OnInit {
 
 	monster: Object;
 
-  constructor(private data: DataService, private route: ActivatedRoute) {
-  	this.route.params.subscribe( params => this.monster = params.id )
+  constructor(private data: DataService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-  	this.data.getMonsterDetails(this.monster).subscribe(
-  		data => this.monster = data
-  	)
+    if (!this.monster) {
+      this.route.params.subscribe( params => this.monster = params.id )
+      this.data.getMonsterDetails(this.monster).subscribe(data => this.monster = data);
+    }
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.route.params.subscribe( params => this.monster = params.id )
+        this.data.getMonsterDetails(this.monster).subscribe(data => this.monster = data);
+      }
+    })
   }
 
   capitalizeFirstLetter(string) {

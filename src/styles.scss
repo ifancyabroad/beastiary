@@ -1,4 +1,7 @@
 @import '~bootstrap/scss/bootstrap.scss';
+@import '~src/variables';
+// @import '~src/forms';
+@import '~font-awesome/scss/font-awesome';
 
 * {
 	margin: 0;
@@ -11,7 +14,7 @@ body {
 	background-repeat: no-repeat;
 	background-position: 90% 80%;
 	background-color: #eee;
-	height: 100vh;
+	background-attachment: fixed;
 }
 
 a, a:hover {
@@ -20,4 +23,14 @@ a, a:hover {
 
 ul, li {
 	list-style: none;	
+}
+
+.underline {
+	height: 2px;
+	width: 150px;
+	background-color: $primary-color;
+}
+
+.content {
+	margin-top: 128px;
 }

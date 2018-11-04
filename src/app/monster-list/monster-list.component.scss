@@ -1,11 +1,33 @@
+@import '~src/variables';
+
 .monster-list {
 	display: flex;
 	flex-wrap: wrap;
 
 	li {
+		text-align: center;
+		font-size: 0.9em;
+		font-style: italic;
 		min-width: 200px;
-		padding: 8px 12px;
 		margin: 6px;
-		background-color: rgba(255, 255, 255, 0.8);
+		color: white;
+		background-color: $secondary-color;
+		background-image: url(/assets/images/list-item-design.png);
+		background-size: contain;
+		background-position: center;
+		transition: background-color 0.4s;
+	}
+
+	a {
+		height: 100%;
+		width: 100%;
+		display: block;
+		padding: 8px 12px;
+		transition: background-color 0.4s;
+	}
+
+	a:hover  {
+		background-color: $primary-color;
+		text-decoration: none;
 	}
 }

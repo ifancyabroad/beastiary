@@ -16,6 +16,12 @@ import { faSearch, faDiceD20 } from '@fortawesome/free-solid-svg-icons';
       transition('show => hide', animate('500ms ease-out')),
       transition('hide => show', animate('500ms ease-out'))
     ]),
+    trigger('fade', [
+      state('void', style({opacity: 0})),
+      transition('void <=> *', [     
+        animate('400ms ease-out')
+      ])
+    ])
   ]
 })
 export class SearchBarComponent implements OnInit {

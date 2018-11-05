@@ -17,7 +17,7 @@
   <div style="width: 100px"></div>
 </nav>
 
-<div class="first-search" *ngIf="firstSearch">
+<div class="first-search" *ngIf="firstSearch" [@fade]>
 	<h1>BEASTIARY</h1>
   <div class="underline"></div>
 	<form #searchForm="ngForm" class="first-search-form" (ngSubmit)="searchMonsters()">

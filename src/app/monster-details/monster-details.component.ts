@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { trigger,style,transition,animate,keyframes,state } from '@angular/animations';
 
 @Component({
@@ -10,9 +10,9 @@ import { trigger,style,transition,animate,keyframes,state } from '@angular/anima
   styleUrls: ['./monster-details.component.scss'],
   animations: [
     trigger('fade', [
-      state('in', style({opacity: 1, transform: 'translateX(0)'})),
-      transition('* <=> *', [     
-        style({opacity: 0, transform: 'translateX(25px)'}),
+      state('void', style({opacity: 0, transform: 'translateX(25px)'})),
+      state('out', style({opacity: 0, transform: 'translateX(25px)'})),
+      transition('* <=> in', [     
         animate('800ms ease-out')
       ])
     ])
@@ -22,28 +22,42 @@ import { trigger,style,transition,animate,keyframes,state } from '@angular/anima
 export class MonsterDetailsComponent implements OnInit {
 
 	monster: Object;
+  monsterId: string;
+  state: string = 'out';
 
-  constructor(private data: DataService, private route: ActivatedRoute, private router: Router) {
+  constructor(private data: DataService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    if (!this.monster) {
-      this.route.params.subscribe( params => this.monster = params.id )
-      this.data.getMonsterDetails(this.monster).subscribe(data => this.monster = data);
-    }
+    this.getMonster();
+  }
 
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.route.params.subscribe( params => this.monster = params.id )
-        this.data.getMonsterDetails(this.monster).subscribe(data => this.monster = data);
-      }
-    })
+  toggleState() {
+    this.state === 'in' ? this.state = 'out' : this.state = 'in'; 
   }
 
   capitalizeFirstLetter(string) {
     if (string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
+  }
+
+  getMonster() {
+    this.route.params.subscribe( params => {
+      this.monsterId = params.id;
+      this.data.getMonsterDetails(this.monsterId).subscribe(data => {
+        if (!this.monster) {
+          this.monster = data;
+          this.toggleState();
+        } else {
+          this.toggleState();
+          setTimeout(() => {
+            this.monster = data
+            this.toggleState();            
+          }, 800)
+        }
+      })
+    })
   }
 
 }

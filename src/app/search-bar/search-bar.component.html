@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark mb-5" [@toggleNav]="firstSearch ? 'hide' : 'show'">
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark" [@toggleNav]="firstSearch ? 'hide' : 'show'">
   <a #siteBrand class="navbar-brand" routerLink="/" (click)="setFirstSearch()">Beastiary</a>
   <div class="m-auto">
 		<form #searchForm="ngForm" class="search-form" (ngSubmit)="searchMonsters()">

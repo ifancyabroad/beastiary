@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,13 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getMonsterList() {
-  	return this.http.get('http://www.dnd5eapi.co/api/monsters/');
+  	return this.http.get('./assets/data/monsters.json/').pipe(
+      map((data:Object[]) => {
+        return data.map((monster) => {
+          return { name: monster['name'], url: monster['url'] } 
+        })
+      })
+    )
   }
 
   updateMonsterList(searchInput) {
@@ -30,9 +37,9 @@ export class DataService {
     this.getMonsterList().subscribe(data => {
       let regex = new RegExp(searchInput.toLowerCase());
       let monsterList: Object[] = [];
-      for (let monster of data['results']) {
+      for (let monster of data) {
         if (regex.test(monster['name'].toLowerCase())) {
-          monster.id = this.extractId(monster.url);
+          monster['id'] = this.extractId(monster.url);
           monsterList.push(monster);
         }
       }
@@ -47,7 +54,11 @@ export class DataService {
   }
 
   getMonsterDetails(id) {
-    return this.http.get(`http://www.dnd5eapi.co/api/monsters/${id}`);
+    return this.http.get('./assets/data/monsters.json/').pipe(
+      map((data:Object[]) => {
+        return data[id - 1];
+      })
+    )
   }
 
 }

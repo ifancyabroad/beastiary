@@ -41,10 +41,9 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit() {
     if (!this.location.path()) { this.firstSearch = true; }
-
     this.data.getMonsterList().subscribe(data => {
-      for (let monster of data['results']) {
-        monster.id = this.data.extractId(monster.url);
+      for (let monster of data) {
+        monster['id'] = this.data.extractId(monster.url);
         this.fullMonsterList.push(monster);
       }
     })
@@ -88,7 +87,7 @@ export class SearchBarComponent implements OnInit {
     if (this.firstSearch) { this.firstSearch = false; }
     let max: number;
     this.data.getMonsterList().subscribe(data => {
-      max = data['results'].length;
+      max = data.length;
       let monsterId = Math.floor(Math.random() * (max - 1) + 1);
       this.router.navigate([`/details/${monsterId}`]);
     })

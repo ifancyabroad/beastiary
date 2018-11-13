@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -19,16 +19,27 @@ export class DataService {
     return this.currentMonsterList;
   }
 
+  fullMonsterList:any;
+
   constructor(private http: HttpClient) { }
 
   getMonsterList() {
-  	return this.http.get('./assets/data/monsters.json/').pipe(
-      map((data:Object[]) => {
-        return data.map((monster) => {
-          return { name: monster['name'], url: monster['url'] } 
+    if (!this.fullMonsterList) {
+      return this.http.get('./assets/data/monsters.json/').pipe(
+        map((data:Object[]) => {
+          this.fullMonsterList = data;
+          return this.fullMonsterList;
         })
-      })
-    )
+      )
+    } else {
+      return of(this.fullMonsterList);
+    }
+  }
+
+  getMonsterNames(list) {
+    return list.map((monster) => {
+      return { name: monster['name'], url: monster['url'] } 
+    })
   }
 
   updateMonsterList(searchInput) {
@@ -52,13 +63,4 @@ export class DataService {
     let regex = /\d/g;
     return url.match(regex).slice(1).join("");
   }
-
-  getMonsterDetails(id) {
-    return this.http.get('./assets/data/monsters.json/').pipe(
-      map((data:Object[]) => {
-        return data[id - 1];
-      })
-    )
-  }
-
 }

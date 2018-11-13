@@ -42,7 +42,8 @@ export class SearchBarComponent implements OnInit {
   ngOnInit() {
     if (!this.location.path()) { this.firstSearch = true; }
     this.data.getMonsterList().subscribe(data => {
-      for (let monster of data) {
+      let monsterNames = this.data.getMonsterNames(data);
+      for (let monster of monsterNames) {
         monster['id'] = this.data.extractId(monster.url);
         this.fullMonsterList.push(monster);
       }

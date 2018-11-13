@@ -45,14 +45,15 @@ export class MonsterDetailsComponent implements OnInit {
   getMonster() {
     this.route.params.subscribe( params => {
       this.monsterId = params.id;
-      this.data.getMonsterDetails(this.monsterId).subscribe(data => {
+      this.data.getMonsterList().subscribe(data => {
+        let newMonster = data[this.monsterId]
         if (!this.monster) {
-          this.monster = data;
+          this.monster = newMonster;
           this.toggleState();
         } else {
           this.toggleState();
           setTimeout(() => {
-            this.monster = data
+            this.monster = newMonster;
             this.toggleState();            
           }, 800)
         }

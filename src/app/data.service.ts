@@ -25,7 +25,7 @@ export class DataService {
 
   getMonsterList() {
     if (!this.fullMonsterList) {
-      return this.http.get('./assets/data/monsters.json/').pipe(
+      return this.http.get('./assets/data/monsters.json').pipe(
         map((data:Object[]) => {
           this.fullMonsterList = data;
           return this.fullMonsterList;

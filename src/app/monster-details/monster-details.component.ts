@@ -46,7 +46,7 @@ export class MonsterDetailsComponent implements OnInit {
     this.route.params.subscribe( params => {
       this.monsterId = params.id;
       this.data.getMonsterList().subscribe(data => {
-        let newMonster = data[this.monsterId]
+        let newMonster = data[Number(this.monsterId) - 1]
         if (!this.monster) {
           this.monster = newMonster;
           this.toggleState();

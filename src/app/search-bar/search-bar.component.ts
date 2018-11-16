@@ -29,7 +29,9 @@ export class SearchBarComponent implements OnInit {
   fullMonsterList: Object[] = [];
   currentMonsterList: Object[] = [];
 
-  showList: boolean = false;
+  selectedMonster: number = -1;
+
+  showList: boolean = true;
 
 	searchInput: string;
   firstSearch: boolean;
@@ -47,7 +49,7 @@ export class SearchBarComponent implements OnInit {
         monster['id'] = this.data.extractId(monster.url);
         this.fullMonsterList.push(monster);
       }
-    })
+    });
   }
 
   resetForm() {
@@ -64,12 +66,34 @@ export class SearchBarComponent implements OnInit {
     this.showList = false;
   }
 
+  stopSubmit(e) {
+    if (e.keyCode === 13 && this.selectedMonster > -1) {
+      e.preventDefault();
+    }
+  }
+
   filterMonsters() {
     this.currentMonsterList = this.fullMonsterList.filter((monster) => {
       let regex = new RegExp(this.searchInput.toLowerCase());
       return regex.test(monster['name'].toLowerCase());
-    })
+    });
     this.showList = true;
+  }
+
+  selectMonster(e) {
+    if (this.currentMonsterList) {
+      switch (e.keyCode) {
+        case 13:
+          this.setInput(this.currentMonsterList[this.selectedMonster]['name']);
+          break;
+        case 38:
+          this.selectedMonster--;
+          break;
+        case 40:
+          this.selectedMonster++;
+          break;
+      }
+    }
   }
 
   searchMonsters() {

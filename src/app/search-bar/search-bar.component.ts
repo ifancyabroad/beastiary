@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data.service';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { trigger,style,transition,animate,keyframes, state } from '@angular/animations';
+import { trigger, style, transition, animate, state } from '@angular/animations';
 import { faSearch, faDiceD20 } from '@fortawesome/free-solid-svg-icons';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-search-bar',
@@ -18,7 +19,7 @@ import { faSearch, faDiceD20 } from '@fortawesome/free-solid-svg-icons';
     ]),
     trigger('fade', [
       state('void', style({opacity: 0})),
-      transition('void <=> *', [     
+      transition('void <=> *', [
         animate('400ms ease-out')
       ])
     ])
@@ -26,14 +27,16 @@ import { faSearch, faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 })
 export class SearchBarComponent implements OnInit {
 
+  @ViewChild('searchForm') searchForm: NgForm;
+
   fullMonsterList: Object[] = [];
   currentMonsterList: Object[] = [];
 
-  selectedMonster: number = -1;
+  selectedMonster = -1;
 
-  showList: boolean = true;
+  showList = true;
 
-	searchInput: string;
+  searchInput: string;
   firstSearch: boolean;
 
   faSearch = faSearch;
@@ -44,7 +47,7 @@ export class SearchBarComponent implements OnInit {
   ngOnInit() {
     if (!this.location.path()) { this.firstSearch = true; }
     this.data.getMonsterList().subscribe(data => {
-      let monsterNames = this.data.getMonsterNames(data);
+      const monsterNames = this.data.getMonsterNames(data);
       for (let monster of monsterNames) {
         monster['id'] = this.data.extractId(monster.url);
         this.fullMonsterList.push(monster);
@@ -73,11 +76,13 @@ export class SearchBarComponent implements OnInit {
   }
 
   filterMonsters() {
-    this.currentMonsterList = this.fullMonsterList.filter((monster) => {
-      let regex = new RegExp(this.searchInput.toLowerCase());
-      return regex.test(monster['name'].toLowerCase());
-    });
-    this.showList = true;
+    if (this.searchInput) {
+      this.currentMonsterList = this.fullMonsterList.filter((monster) => {
+        const regex = new RegExp(this.searchInput.toLowerCase());
+        return regex.test(monster['name'].toLowerCase());
+      });
+      this.showList = true;
+    }
   }
 
   selectMonster(e) {
@@ -93,7 +98,7 @@ export class SearchBarComponent implements OnInit {
           if (this.selectedMonster > 0) { this.selectedMonster--; }
           break;
         case 40:
-        if (this.currentMonsterList.length > this.selectedMonster + 1) { this.selectedMonster++; }
+          if (this.currentMonsterList.length > this.selectedMonster + 1) { this.selectedMonster++; }
           break;
       }
     }
@@ -106,7 +111,7 @@ export class SearchBarComponent implements OnInit {
       this.data.updateMonsterList(this.searchInput);
       this.router.navigate(['/list', {search: this.searchInput}]);
     } else {
-      this.router.navigate([`/details/${this.currentMonsterList[0]['id']}`]);      
+      this.router.navigate([`/details/${this.currentMonsterList[0]['id']}`]);
     }
     this.resetForm();
   }
@@ -118,6 +123,6 @@ export class SearchBarComponent implements OnInit {
       max = data.length;
       let monsterId = Math.floor(Math.random() * (max - 1) + 1);
       this.router.navigate([`/details/${monsterId}`]);
-    })
+    });
   }
 }

@@ -85,12 +85,13 @@ export class SearchBarComponent implements OnInit {
       switch (e.keyCode) {
         case 13:
           this.setInput(this.currentMonsterList[this.selectedMonster]['name']);
+          this.selectedMonster = -1;
           break;
         case 38:
-          this.selectedMonster--;
+          if (this.selectedMonster > 0) { this.selectedMonster--; }
           break;
         case 40:
-          this.selectedMonster++;
+        if (this.currentMonsterList.length > this.selectedMonster + 1) { this.selectedMonster++; }
           break;
       }
     }

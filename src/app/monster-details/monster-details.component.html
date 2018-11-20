@@ -12,62 +12,74 @@
 	</div>
 </div>
 <div class="row" *ngIf="monster" [@fade]="state">
-	<div class="col-lg-3 col-sm-6">
+	<div class="col-lg-6">
+		<div class="row">
+			<div class="col-sm-6">
+				<table>
+					<tbody>
+						<tr>
+							<td>Hit Points</td>
+							<td>{{ monster.hit_points }}</td>
+						</tr>
+						<tr>
+							<td>Strength</td>
+							<td>{{ monster.strength }}</td>
+						</tr>
+						<tr>
+							<td>Dexterity</td>
+							<td>{{ monster.dexterity }}</td>
+						</tr>
+						<tr>
+							<td>Constitution</td>
+							<td>{{ monster.constitution }}</td>
+						</tr>
+						<tr>
+							<td>Intelligence</td>
+							<td>{{ monster.intelligence }}</td>
+						</tr>
+						<tr>
+							<td>Wisdom</td>
+							<td>{{ monster.wisdom }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-sm-6">
+				<table>
+					<tbody>
+						<tr>
+							<td>Armor Class</td>
+							<td>{{ monster.armor_class }}</td>
+						</tr>
+						<tr>
+							<td>Perception</td>
+							<td>{{ monster.perception }}</td>
+						</tr>
+						<tr>
+							<td>Constitution Save</td>
+							<td>{{ monster.constitution_save }}</td>
+						</tr>
+						<tr>
+							<td>Intelligence Save</td>
+							<td>{{ monster.intelligence_save }}</td>
+						</tr>
+						<tr>
+							<td>Wisdom Save</td>
+							<td>{{ monster.wisdom_save }}</td>
+						</tr>
+						<tr class="monster-rating">
+							<td>Challenge Rating</td>
+							<td>{{ monster.challenge_rating }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 		<table>
 			<tbody>
-				<tr>
-					<td>Hit Points</td>
-					<td>{{ monster.hit_points }}</td>
-				</tr>
-				<tr>
-					<td>Strength</td>
-					<td>{{ monster.strength }}</td>
-				</tr>
-				<tr>
-					<td>Dexterity</td>
-					<td>{{ monster.dexterity }}</td>
-				</tr>
-				<tr>
-					<td>Constitution</td>
-					<td>{{ monster.constitution }}</td>
-				</tr>
-				<tr>
-					<td>Intelligence</td>
-					<td>{{ monster.intelligence }}</td>
-				</tr>
-				<tr>
-					<td>Wisdom</td>
-					<td>{{ monster.wisdom }}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div class="col-lg-3 col-sm-6">
-		<table>
-			<tbody>
-				<tr>
-					<td>Armor Class</td>
-					<td>{{ monster.armor_class }}</td>
-				</tr>
-				<tr>
-					<td>Perception</td>
-					<td>{{ monster.perception }}</td>
-				</tr>
-				<tr>
-					<td>Constitution Save</td>
-					<td>{{ monster.constitution_save }}</td>
-				</tr>
-				<tr>
-					<td>Intelligence Save</td>
-					<td>{{ monster.intelligence_save }}</td>
-				</tr>
-				<tr>
-					<td>Wisdom Save</td>
-					<td>{{ monster.wisdom_save }}</td>
-				</tr>
-				<tr class="monster-rating">
-					<td>Challenge Rating</td>
-					<td>{{ monster.challenge_rating }}</td>
+				<tr *ngFor="let action of monster.actions">
+					<td>{{ action.name }}</td>
+					<td class="text-left">{{ action.desc }}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -78,6 +90,14 @@
 				<tr *ngFor="let ability of monster.special_abilities">
 					<td>{{ ability.name }}</td>
 					<td class="text-left">{{ ability.desc }}</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<tbody>
+				<tr *ngFor="let action of monster.legendary_actions">
+					<td>{{ action.name }}</td>
+					<td class="text-left">{{ action.desc }}</td>
 				</tr>
 			</tbody>
 		</table>

@@ -107,7 +107,7 @@ export class SearchBarComponent implements OnInit {
   searchMonsters() {
     if (this.firstSearch) { this.firstSearch = false; }
     this.filterMonsters();
-    if (this.currentMonsterList.length > 1) {
+    if (this.currentMonsterList.length !== 1) {
       this.data.updateMonsterList(this.searchInput);
       this.router.navigate(['/list', {search: this.searchInput}]);
     } else {

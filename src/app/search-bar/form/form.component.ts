@@ -63,11 +63,25 @@ export class FormComponent implements OnInit {
     }
   }
 
+  splitMonsterName(regex, name) {
+    const parts = name.replace(regex, '*').split('*');
+    const first = parts[0];
+    const last = parts[1];
+    const middle = name.match(regex)[0];
+    return [first, middle, last];
+  }
+
   filterMonsters() {
     if (this.searchInput) {
-      this.currentMonsterList = this.fullMonsterList.filter((monster) => {
-        const regex = new RegExp(this.searchInput.toLowerCase());
-        return regex.test(monster['name'].toLowerCase());
+      const regex = new RegExp(this.searchInput, 'i');
+      this.currentMonsterList = this.fullMonsterList
+      .filter(monster => regex.test(monster['name'].toLowerCase()))
+      .map(monster => {
+        const splitName = this.splitMonsterName(regex, monster['name']);
+        monster['first'] = splitName[0];
+        monster['middle'] = splitName[1];
+        monster['last'] = splitName[2];
+        return monster;
       });
       this.showList = true;
     }

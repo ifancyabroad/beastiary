@@ -1,7 +1,9 @@
 <form #searchForm="ngForm" [class]="firstSearch ? 'first-search-form' : 'search-form'" (ngSubmit)="searchMonsters()">
   <input type="text" name="search" autocomplete="off" [(ngModel)]="searchInput" (keydown)="stopSubmit($event)" (keyup)="filterMonsters(); selectMonster($event)" required>
   <ul class="monster-list" *ngIf="searchInput && showList">
-    <li *ngFor="let monster of currentMonsterList" (click)="setInput(monster.name)" [class.selected]="selectedMonster === currentMonsterList.indexOf(monster)">{{ monster.name }}</li>
+    <li *ngFor="let monster of currentMonsterList" (click)="setInput(monster.name)" [class.selected]="selectedMonster === currentMonsterList.indexOf(monster)">
+      <span>{{ monster.first }}</span><strong>{{ monster.middle }}</strong><span>{{ monster.last }}</span>
+    </li>
   </ul>
   <button class="btn" type="submit" name="submit" value="Search" [disabled]="!searchForm.form.valid">
     <fa-icon [icon]="faSearch"></fa-icon>

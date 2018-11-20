@@ -20,9 +20,7 @@ export class FormComponent implements OnInit {
   currentMonsterList: Object[] = [];
 
   selectedMonster = -1;
-
   showList = true;
-
   searchInput: string;
 
   faSearch = faSearch;
@@ -58,7 +56,7 @@ export class FormComponent implements OnInit {
   }
 
   stopSubmit(e) {
-    if (e.keyCode === 13 && this.selectedMonster > -1) {
+    if (this.selectedMonster > -1) {
       e.preventDefault();
     }
   }
@@ -89,19 +87,13 @@ export class FormComponent implements OnInit {
 
   selectMonster(e) {
     if (this.currentMonsterList) {
-      switch (e.keyCode) {
-        case 13:
-          if (this.selectedMonster > -1) {
-            this.setInput(this.currentMonsterList[this.selectedMonster]['name']);
-            this.selectedMonster = -1;
-          }
-          break;
-        case 38:
-          if (this.selectedMonster > 0) { this.selectedMonster--; }
-          break;
-        case 40:
-          if (this.currentMonsterList.length > this.selectedMonster + 1) { this.selectedMonster++; }
-          break;
+      if (e.keyCode === 13 && this.selectedMonster > -1) {
+        this.setInput(this.currentMonsterList[this.selectedMonster]['name']);
+        this.selectedMonster = -1;
+      } else if (e.keyCode === 38 && this.selectedMonster > 0) {
+        this.selectedMonster--;
+      } else if (e.keyCode === 40 && this.currentMonsterList.length > this.selectedMonster + 1) {
+        this.selectedMonster++;
       }
     }
   }

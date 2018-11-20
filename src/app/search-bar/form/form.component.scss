@@ -38,6 +38,14 @@ button:hover {
 
 button[name="random"] {
   background-color: $secondary-color;
+
+  .animate {
+    transition: 0.2s;
+  }
+}
+
+button[name="random"]:hover .animate {
+  transform: rotateZ(90deg);
 }
 
 .monster-list {

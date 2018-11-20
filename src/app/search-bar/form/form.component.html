@@ -8,7 +8,7 @@
   <button class="btn" type="submit" name="submit" value="Search" [disabled]="!searchForm.form.valid">
     <fa-icon [icon]="faSearch"></fa-icon>
   </button>
-  <button class="btn" type="button" name="random" value="Random" (click)="searchRandomMonster()" (mouseenter)="spin = 90" (mouseleave)="spin = 0">
-    <fa-icon [icon]="faDiceD20" transform="rotate-{{spin}}"></fa-icon>
+  <button class="btn" type="button" name="random" value="Random" (click)="searchRandomMonster()">
+    <div class="animate"><fa-icon [icon]="faDiceD20"></fa-icon></div>
   </button>
 </form>

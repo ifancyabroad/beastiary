@@ -11,13 +11,15 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormComponent } from './search-bar/form/form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MonsterListComponent,
     MonsterDetailsComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

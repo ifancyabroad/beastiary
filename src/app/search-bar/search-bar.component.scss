@@ -2,92 +2,27 @@
 
 nav {
 	padding: 20px 26px;
-    z-index: 1;
+	z-index: 1;
 
-    .navbar-brand {
-    	font-family: 'Patua One', cursive;
-    }
-
-    .search-form {
-        width: max-content;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        font-size: 0.9em;
-
-    }
+	.navbar-brand {
+		font-family: 'Patua One', cursive;
+	}
 }
 
 .first-search {
-    width: 90%;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	width: 90%;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 
-    h1 {
-        font-family: 'Patua One', cursive;
-        text-align: center;
-        font-size: 3em;
-    }
+	h1 {
+		font-family: 'Patua One', cursive;
+		text-align: center;
+		font-size: 3em;
+	}
 
-    .underline {
-        margin: auto;
-    }
-
-    .first-search-form {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        width: 80%;
-        max-width: 400px;
-        margin: 24px auto;
-        font-size: 1.1em;
-    }
-}
-
-input {
-    width: 100%;
-    padding: 8px 10px;
-    border: none;
-    outline: none;
-}
-
-button {
-    width: 41px;
-    color: white;
-    background-color: $primary-color;
-    border-radius: 0;
-}
-
-button:hover {
-    cursor: pointer;
-}
-
-button[name="random"] {
-    background-color: $secondary-color;
-}
-
-.monster-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 80%;
-    max-height: 250px;
-    overflow: auto;
-    background-color: white;
-
-    li {
-        padding: 2px 10px;
-        border-bottom: 1px solid #e6e6e6;
-    }
-
-    li:hover {
-        cursor: pointer;
-        background-color: #e6e6e6; 
-    }
-
-    .selected {
-        background-color: #e6e6e6;
-    }
+	.underline {
+		margin: auto;
+	}
 }

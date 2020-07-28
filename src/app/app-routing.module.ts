@@ -4,6 +4,9 @@ import { MonsterDetailsComponent } from './monster-details/monster-details.compo
 import { MonsterListComponent } from './monster-list/monster-list.component';
 
 const routes: Routes = [
+  {
+    path: '/'
+  },
 	{
 		path: 'list',
 		component: MonsterListComponent

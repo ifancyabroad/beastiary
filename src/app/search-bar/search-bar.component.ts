@@ -11,10 +11,6 @@ import { filter } from 'rxjs/operators';
     trigger('toggleNav', [
       state('hide', style({transform: 'translateY(-100%)'})),
       transition('hide <=> *', animate('500ms ease-out'))
-    ]),
-    trigger('fade', [
-      state('void', style({opacity: 0})),
-      transition('void <=> *', animate('400ms ease-out'))
     ])
   ]
 })

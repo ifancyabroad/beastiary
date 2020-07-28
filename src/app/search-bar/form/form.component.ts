@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { DataService } from '../../data.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 export class FormComponent implements OnInit {
 
   @ViewChild('searchForm') searchForm: NgForm;
-  @Input() firstSearch: boolean;
+  @Input() class: string;
 
   fullMonsterList: Object[] = [];
   currentMonsterList: Object[] = [];

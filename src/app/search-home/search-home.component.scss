@@ -1,0 +1,19 @@
+@import '~src/variables';
+
+.search {
+	width: 90%;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	h1 {
+		font-family: 'Patua One', cursive;
+		text-align: center;
+		font-size: 3em;
+	}
+
+	.underline {
+		margin: auto;
+	}
+}

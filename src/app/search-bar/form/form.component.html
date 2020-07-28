@@ -1,4 +1,4 @@
-<form #searchForm="ngForm" [class]="firstSearch ? 'first-search-form' : 'search-form'" (ngSubmit)="searchMonsters()">
+<form #searchForm="ngForm" class="{{ class }}" (ngSubmit)="searchMonsters()">
   <input type="text" name="search" autocomplete="off" [(ngModel)]="searchInput" (keydown.enter)="stopSubmit($event)" (keyup)="filterMonsters(); selectMonster($event)" required>
   <ul class="monster-list" *ngIf="searchInput && showList">
     <li *ngFor="let monster of currentMonsterList" (click)="setInput(monster.name)" [class.selected]="selectedMonster === currentMonsterList.indexOf(monster)">

@@ -1,13 +1,7 @@
 <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark" [@toggleNav]="firstSearch ? 'hide' : 'show'">
   <a #siteBrand class="navbar-brand" routerLink="/">Beastiary</a>
   <div class="m-auto">
-		<app-form></app-form>
+		<app-form [class]="'search-form'"></app-form>
   </div>
   <div style="width: 100px"></div>
 </nav>
-
-<div class="first-search" *ngIf="firstSearch" [@fade]>
-	<h1>BEASTIARY</h1>
-  <div class="underline"></div>
-  <app-form [firstSearch]="firstSearch"></app-form>
-</div>

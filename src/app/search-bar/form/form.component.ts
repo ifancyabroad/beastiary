@@ -14,7 +14,6 @@ export class FormComponent implements OnInit {
 
   @ViewChild('searchForm') searchForm: NgForm;
   @Input() firstSearch: boolean;
-  @Output() toggleSearch: EventEmitter<any> = new EventEmitter();
 
   fullMonsterList: Object[] = [];
   currentMonsterList: Object[] = [];
@@ -46,13 +45,6 @@ export class FormComponent implements OnInit {
   setInput(name) {
     this.searchInput = name;
     this.showList = false;
-  }
-
-  toggleFirstSearch() {
-    if (this.firstSearch) {
-      this.firstSearch = false;
-      this.toggleSearch.emit(false);
-    }
   }
 
   stopSubmit(e) {
@@ -99,7 +91,6 @@ export class FormComponent implements OnInit {
   }
 
   searchMonsters() {
-    this.toggleFirstSearch();
     this.filterMonsters();
     if (this.currentMonsterList.length !== 1) {
       this.data.updateMonsterList(this.searchInput);
@@ -111,7 +102,6 @@ export class FormComponent implements OnInit {
   }
 
   searchRandomMonster() {
-    this.toggleFirstSearch();
     this.data.getMonsterList().subscribe(data => {
       let max = data.length;
       let monsterId = Math.floor(Math.random() * (max - 1) + 1);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { trigger, style, transition, animate, state } from '@angular/animations';
+import { Router, NavigationEnd, RouterEvent } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-bar',
@@ -21,13 +22,13 @@ export class SearchBarComponent implements OnInit {
 
   firstSearch = false;
 
-  constructor(private location: Location) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    if (!this.location.path()) { this.firstSearch = true; }
-  }
-
-  setFirstSearch(e) {
-    this.firstSearch = e;
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+    ).subscribe((event: RouterEvent) => {
+      this.firstSearch = event.url === '/';
+    });
   }
 }

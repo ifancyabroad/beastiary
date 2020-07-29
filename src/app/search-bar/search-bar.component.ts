@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
-import { Router, NavigationEnd, RouterEvent } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -16,15 +16,15 @@ import { filter } from 'rxjs/operators';
 })
 export class SearchBarComponent implements OnInit {
 
-  firstSearch = false;
+  firstSearch = true;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-    ).subscribe((event: RouterEvent) => {
-      this.firstSearch = event.url === '/';
+    ).subscribe((event: NavigationEnd) => {
+      this.firstSearch = event.urlAfterRedirects === '/';
     });
   }
 }
